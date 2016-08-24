@@ -1,6 +1,7 @@
 /*jshint multistr:true*/
 var QUnit = require('qunitjs');
 var appModule = require('./helpers/app-module');
+// var testHelpers = require('./helpers/test-helpers');
 
 function assertHTMLMatches(assert, actualHTML, expectedHTML) {
   assert.ok(actualHTML.match(expectedHTML), actualHTML + " matches " + expectedHTML);

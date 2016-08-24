@@ -23,13 +23,22 @@ export function setupApplicationRegistry(registry) {
   registry.register('renderer:-dom', InteractiveRenderer);
   registry.register('renderer:-inert', InertRenderer);
 
+  let { DOMChanges, DOMTreeConstruction, NodeDOMTreeConstruction } = require('ember-glimmer/dom');
+
+
   registry.register('service:-dom-changes', {
     create({ document }) { return new DOMChanges(document); }
   });
 
-  registry.register('service:-dom-tree-construction', {
-    create({ document }) { return new DOMTreeConstruction(document); }
-  });
+  if (typeof document !== 'undefined') {
+    registry.register('service:-dom-tree-construction', {
+      create({ document }) { return new DOMTreeConstruction(document); }
+    });
+  } else {
+    registry.register('service:-dom-tree-construction', {
+      create({ document: simpleDocument }) { return new NodeDOMTreeConstruction(simpleDocument); }
+    });
+  }
 }
 
 export function setupEngineRegistry(registry) {
