@@ -17,6 +17,6 @@ function addFiles(files) {
     .forEach(require);
 }
 
-addFiles('/**/*-test.js');
+addFiles('/**/app-boot-test.js');
 
 QUnit.load();
