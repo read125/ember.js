@@ -1,4 +1,6 @@
 import { privatize as P } from 'container';
+import require from 'require';
+import { environment } from 'ember-environment';
 import { InteractiveRenderer, InertRenderer } from './renderer';
 import { DOMChanges, DOMTreeConstruction } from './dom';
 import OutletView from './views/outlet';
@@ -25,20 +27,17 @@ export function setupApplicationRegistry(registry) {
 
   let { DOMChanges, DOMTreeConstruction, NodeDOMTreeConstruction } = require('ember-glimmer/dom');
 
-
   registry.register('service:-dom-changes', {
     create({ document }) { return new DOMChanges(document); }
   });
 
-  if (typeof document !== 'undefined') {
-    registry.register('service:-dom-tree-construction', {
-      create({ document }) { return new DOMTreeConstruction(document); }
-    });
-  } else {
-    registry.register('service:-dom-tree-construction', {
-      create({ document: simpleDocument }) { return new NodeDOMTreeConstruction(simpleDocument); }
-    });
-  }
+  registry.register('service:-dom-tree-construction', {
+    create({ document }) {
+      let Implementation = environment.hasDOM ? DOMTreeConstruction : NodeDOMTreeConstruction;
+
+      return new Implementation(document); 
+    }
+  });
 }
 
 export function setupEngineRegistry(registry) {

@@ -33,7 +33,7 @@ if (appModule.canRunTests) {
     ");
 
     return this.renderToHTML('/').then(function(html) {
-      assertHTMLMatches(html, '<body><div id="EMBER_ID" class="ember-view"><div id="ember241" class="ember-view"><h1>Hello World</h1><div><div id="EMBER_ID" class="ember-view"><p>The files are *inside* the computer?!</p></div></div></div></div></body>');
+      assertHTMLMatches(html, '<body><div id="EMBER_ID" class="ember-view"><div id="EMBER_ID" class="ember-view"><h1>Hello World</h1><div><div id="EMBER_ID" class="ember-view"><p>The files are *inside* the computer?!</p></div></div></div></div></body>');
     });
   });
 
