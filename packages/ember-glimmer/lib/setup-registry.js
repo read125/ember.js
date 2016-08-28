@@ -1,5 +1,4 @@
 import { privatize as P } from 'container';
-import require from 'require';
 import { environment } from 'ember-environment';
 import { InteractiveRenderer, InertRenderer } from './renderer';
 import { DOMChanges, DOMTreeConstruction } from './dom';
@@ -26,8 +25,6 @@ export function setupApplicationRegistry(registry) {
   registry.register('renderer:-dom', InteractiveRenderer);
   registry.register('renderer:-inert', InertRenderer);
 
-  let { DOMChanges, DOMTreeConstruction, NodeDOMTreeConstruction } = require('ember-glimmer/dom');
-
   registry.register('service:-dom-changes', {
     create({ document }) { return new DOMChanges(document); }
   });
@@ -36,7 +33,7 @@ export function setupApplicationRegistry(registry) {
     create({ document }) {
       let Implementation = environment.hasDOM ? DOMTreeConstruction : NodeDOMTreeConstruction;
 
-      return new Implementation(document); 
+      return new Implementation(document);
     }
   });
 }

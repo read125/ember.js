@@ -26,11 +26,11 @@ QUnit.module("Components can be rendered without a DOM dependency", {
   },
 
   afterEach: function() {
-    // delete global.Ember;
+    delete global.Ember;
 
-    // // clear the previously cached version of this module
-    // delete require.cache[emberPath + '.js'];
-    // delete require.cache[templateCompilerPath + '.js'];
+    // clear the previously cached version of this module
+    delete require.cache[emberPath + '.js'];
+    delete require.cache[templateCompilerPath + '.js'];
   }
 });
 
